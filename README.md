@@ -52,4 +52,4 @@ A script read each candidate's own CD rate page; 252 of 595 institutions posted 
 
 ## License and citation
 
-CC BY 4.0. Cite as: Klagge, Kevin D., Highest Posted CD Rates in the US by Term (2026), StepUpLaw, https://stepuplaw.com/data/cd-rates/.
+CC BY 4.0. DOI 10.5281/zenodo.22951269. Cite as: Klagge, Kevin D., Highest Posted CD Rates in the US by Term (2026), StepUpLaw, https://stepuplaw.com/data/cd-rates/ (DOI 10.5281/zenodo.22951269).
