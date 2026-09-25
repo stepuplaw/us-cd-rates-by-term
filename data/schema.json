@@ -1,0 +1,77 @@
+{
+  "floor_apy_pct": 3.0,
+  "fields": [
+    {
+      "name": "term_months",
+      "description": "CD term in months"
+    },
+    {
+      "name": "rank",
+      "description": "Rank within the term by APY (ties share a rank), after dropping rates below the floor"
+    },
+    {
+      "name": "institution",
+      "description": "Institution name as marketed"
+    },
+    {
+      "name": "kind",
+      "description": "bank or credit_union"
+    },
+    {
+      "name": "state",
+      "description": "Headquarters state"
+    },
+    {
+      "name": "apy_pct",
+      "description": "Annual percentage yield posted by the institution, percent"
+    },
+    {
+      "name": "min_deposit",
+      "description": "Stated minimum opening deposit in dollars, blank if not stated"
+    },
+    {
+      "name": "promotion",
+      "description": "yes if the institution's own page marks it as a special, promotion or limited-time rate"
+    },
+    {
+      "name": "product_note",
+      "description": "Special product type if any (for example no-penalty or bump-up)"
+    },
+    {
+      "name": "fdic_cert",
+      "description": "FDIC certificate number for banks"
+    },
+    {
+      "name": "ncua_charter",
+      "description": "NCUA charter number for credit unions"
+    },
+    {
+      "name": "remote_opening",
+      "description": "yes if the institution's own pages say an account can be opened online; no if they say in person only; otherwise not stated"
+    },
+    {
+      "name": "nonresident_eligible",
+      "description": "What the institution's own pages say about customers who are not US residents"
+    },
+    {
+      "name": "cu_membership_open_nationwide",
+      "description": "For credit unions, whether anyone in the US can join (usually through a partner organization)"
+    },
+    {
+      "name": "early_withdrawal_penalty",
+      "description": "Early withdrawal penalty as stated, abridged"
+    },
+    {
+      "name": "source_url",
+      "description": "The institution's page where the rate was read"
+    },
+    {
+      "name": "read_note",
+      "description": "How the rate was read when it needed a person (for example a browser read or a homepage banner)"
+    },
+    {
+      "name": "date_checked",
+      "description": "Date the rate was read (YYYY-MM-DD)"
+    }
+  ]
+}

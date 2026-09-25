@@ -1,0 +1,37 @@
+{
+  "title": "Highest Posted CD Rates in the US by Term (2026)",
+  "upload_type": "dataset",
+  "description": "Posted certificate of deposit rates at or above 3.00% APY for 3, 6, 12, 18, 24, 36 and 60 month terms from 203 US banks and credit unions, ranked by term (821 rows). Each rate was read on the institution's own rate page and carries that URL and the date it was read, plus the stated minimum deposit, whether the institution says an account can be opened online, what it says about customers who are not US residents, credit union membership routes and the early withdrawal penalty. Candidates were 595 institutions: the 400 banks paying the highest average rates on time deposits in their June 30, 2026 Call Reports, every Florida-headquartered bank, 59 online banks and 62 large credit unions. Rows read by hand in a browser say so. Compiled 2026-09-24.",
+  "creators": [
+    {
+      "name": "Klagge, Kevin D.",
+      "affiliation": "Klagge Law, PLLC (StepUpLaw)",
+      "orcid": "0009-0002-1385-8498"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "language": "eng",
+  "version": "2026.09.25",
+  "keywords": [
+    "CD rates",
+    "certificate of deposit",
+    "deposit rates",
+    "credit union certificates",
+    "banks",
+    "open data",
+    "2026"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://stepuplaw.com/data/cd-rates/",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/stepuplaw/us-cd-rates-by-term",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}
