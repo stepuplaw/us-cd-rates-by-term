@@ -19,7 +19,7 @@ FIELDS = [
  ("product_note","Special product type if any (for example no-penalty or bump-up)"),
  ("fdic_cert","FDIC certificate number for banks"),
  ("ncua_charter","NCUA charter number for credit unions"),
- ("remote_opening","yes if the institution's own pages say an account can be opened online; no if they say in person only; otherwise not stated"),
+ ("remote_opening","yes if the institution's website offers an online application (who may use it not yet checked); states: XX, YY if online applications are limited to residents of those states; nationwide if any US resident may apply; local if limited to its market area; no if the institution says in person only; otherwise not stated"),
  ("nonresident_eligible","What the institution's own pages say about customers who are not US residents"),
  ("cu_membership_open_nationwide","For credit unions, whether anyone in the US can join (usually through a partner organization)"),
  ("early_withdrawal_penalty","Early withdrawal penalty as stated, abridged"),
@@ -31,7 +31,27 @@ FIELDS = [
 # Hand-checked corrections (2026-09-25)
 OVERRIDES={
  "United Midwest Savings Bank, National Association":{"read_note":"Rate from the homepage banner '6-12 Month CDs with an APY of 4.75% are here!', which carries no date or minimum; the bank's CD rates page showed no rate table when read in a browser on 2026-09-24. The page says new customers must open their first account in person at a branch.","remote_opening":"no"},
+ "Habib American Bank":{"remote_opening":"states: NY, NJ, CA","read_note":"Online application only for applicants who are at least 18, legal residents of the United States and live in New York, New Jersey or California. It requires a US Social Security number and a government ID other than a passport (read by hand 2026-09-25)."},
  "Raymond James Bank":{"min_deposit":"1000","read_note":"Rates effective September 18, 2026 per the bank's deposit page. Minimum $1,000, or $2,000 if bought through a Raymond James brokerage account. Rates by phone at 800.718.2265, option 4, or through an advisor."},
+}
+
+# Plain-sentence wording for the nonresident field, and directory-based answers (2026-09-25)
+NR_TEXT={
+ "not stated":"not stated",
+ "no":"Accounts are limited to US citizens and US residents, according to the institution's own pages.",
+ "no (SSN required)":"Opening an account requires a US Social Security number, according to the institution's own pages.",
+ "no for the posted rate (separate international CD; rate not published)":"The posted rate is for US customers. A separate international CD is offered at a rate set by a banker.",
+ "yes, through a separate international CD whose rate is not published":"Customers living abroad can open a separate international CD at a rate set by a banker.",
+ "yes (listed countries)":"Customers living in the countries it lists can apply.",
+ "Canadian residents only":"Canadian residents can apply.",
+ "yes (UN community members)":"Members of the United Nations community can join from abroad.",
+ "yes":"Customers living abroad can apply, according to the institution's own pages.",
+}
+NR_DIRECTORY={
+ "BTG Pactual Bank":"The posted CD rate is for US citizens and resident aliens. Residents of Brazil and Chile who are BTG Pactual clients can open a US dollar account held at Regent Bank.",
+ "Chevron Federal Credit Union":"Chevron employees working outside the US can join. Other applicants need a US Social Security number.",
+ "Alliant Credit Union":"People living outside the US can join if they have a US Social Security number or an ITIN.",
+ "Presidential Bank":"Nonresident aliens may be able to open an account in person at a branch.",
 }
 rows=[]
 for t in TERMS:
@@ -53,6 +73,7 @@ for t in TERMS:
          "source_url":r["source_url"],"read_note":note[:300],"date_checked":r["date_collected"],
         })
 for r in rows:
+    r["nonresident_eligible"]=NR_DIRECTORY.get(r["institution"]) or NR_TEXT.get(r["nonresident_eligible"],r["nonresident_eligible"])
     r.update(OVERRIDES.get(r["institution"],{}))
 for r in rows:
     for k,v in r.items():

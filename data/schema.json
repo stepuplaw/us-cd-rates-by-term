@@ -47,7 +47,7 @@
     },
     {
       "name": "remote_opening",
-      "description": "yes if the institution's own pages say an account can be opened online; no if they say in person only; otherwise not stated"
+      "description": "yes if the institution's website offers an online application (who may use it not yet checked); states: XX, YY if online applications are limited to residents of those states; nationwide if any US resident may apply; local if limited to its market area; no if the institution says in person only; otherwise not stated"
     },
     {
       "name": "nonresident_eligible",
