@@ -3,9 +3,15 @@
 Keeps rates at or above FLOOR for each standard term, re-ranks, and writes
 publish/cd_rates.csv, publish/cd_rates.json and publish/schema.json.
 The site copies these with scripts/sync-cd-rates-dataset.mjs."""
-import csv, json, os, re
+import csv, datetime, json, os, re
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FLOOR = 3.00
+# Weekly refresh (2026-09-28): a rate not re-read within MAX_AGE_DAYS is left out rather than shown
+# as current. Rates read by hand in a browser (data/rates_browser_*.csv) are not re-read by the
+# weekly job, so they fall out after 30 days unless a new browser pass adds a newer file.
+MAX_AGE_DAYS = 30
+CUTOFF = (datetime.date.today() - datetime.timedelta(days=MAX_AGE_DAYS)).isoformat()
+aged_out = set()
 TERMS = [3, 6, 12, 18, 24, 36, 60]
 FIELDS = [
  ("term_months","CD term in months"),
@@ -56,6 +62,8 @@ NR_DIRECTORY={
 rows=[]
 for t in TERMS:
     src=[r for r in csv.DictReader(open(os.path.join(BASE,"data",f"top200_{t}m.csv"))) if float(r["apy_pct"])>=FLOOR]
+    aged_out.update(r["institution"].strip() for r in src if (r["date_collected"] or "0000") < CUTOFF)
+    src=[r for r in src if (r["date_collected"] or "0000") >= CUTOFF]
     src.sort(key=lambda r:-float(r["apy_pct"]))
     rank=0; prev=None
     for i,r in enumerate(src,1):
@@ -84,4 +92,5 @@ with open(os.path.join(out,"cd_rates.csv"),"w",newline="") as f:
 json.dump(rows,open(os.path.join(out,"cd_rates.json"),"w"),indent=1)
 json.dump({"floor_apy_pct":FLOOR,"fields":[{"name":k,"description":d} for k,d in FIELDS]},open(os.path.join(out,"schema.json"),"w"),indent=2)
 from collections import Counter
+if aged_out: print("left out, not re-read since", CUTOFF + ":", ", ".join(sorted(aged_out)))
 print(len(rows),"rows", dict(Counter(r["term_months"] for r in rows)), "institutions", len({r["institution"] for r in rows}))
